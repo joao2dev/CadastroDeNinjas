@@ -23,11 +23,14 @@ public class NinjaModel {
     @Column(name = "nome")
     private String nome;
 
-    @Column(unique = true, name = "email")
+    @Column(unique = true)
     private String email;
 
     @Column(name = "idade")
     private int idade;
+
+    @Column(name = "img_url")
+    private String img;
 
 //  @ManyToOne muitos ninjas para uma missao
     @ManyToOne
