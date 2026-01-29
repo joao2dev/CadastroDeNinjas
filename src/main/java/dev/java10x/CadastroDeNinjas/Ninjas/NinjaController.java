@@ -28,9 +28,9 @@ public List<NinjaModel> mostrarTodosNinja(){
 }
 
 // mostrar ninja POR ID(READ)
-@GetMapping("/mostrarID")
-public String mostrarNinjaId(){
-    return "Mostrar Ninja pelo ID";
+@GetMapping("/mostrar/{id}")
+public NinjaModel mostrarNinjaId(@PathVariable Long id){
+   return ninjaServices.mostrarNinjaPorId(id);
 }
 
 // Alterar dados dos ninjas(UPDATE)
@@ -44,5 +44,6 @@ public String alterarNinjaPorId(){
 public String deletarNinjaId(){
     return "Ninja deletado";
 }
+
 
 }
