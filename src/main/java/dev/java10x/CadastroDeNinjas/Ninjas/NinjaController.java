@@ -2,11 +2,19 @@ package dev.java10x.CadastroDeNinjas.Ninjas;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("ninjas")
 public class NinjaController {
 
-// Adicionar ninja(CREATE)
+    NinjaServices ninjaServices;
+
+    public NinjaController(NinjaServices ninjaServices) {
+        this.ninjaServices = ninjaServices;
+    }
+
+    // Adicionar ninja(CREATE)
 @PostMapping("/adicionar")
 public String adicionarNinja(){
     return "Ninja adicionado";
@@ -14,15 +22,9 @@ public String adicionarNinja(){
 
 
 // mostrar ninja(READ)
-@GetMapping("/mostrar")
-public String mostrarNinja(){
-    return "Mostrar Ninja";
-}
-
-// mostrar ninja(READ)
 @GetMapping("/mostrartodos")
-public String mostrarTodosNinja(){
-    return "todos Ninjas";
+public List<NinjaModel> mostrarTodosNinja(){
+    return ninjaServices.mostrarNinjas();
 }
 
 // mostrar ninja POR ID(READ)
