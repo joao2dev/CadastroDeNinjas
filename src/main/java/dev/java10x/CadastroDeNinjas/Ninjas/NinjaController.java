@@ -8,15 +8,18 @@ import java.util.List;
 @RequestMapping("ninjas")
 public class NinjaController {
 
-    NinjaServices ninjaServices;
+    private NinjaServices ninjaServices;
+
 
     public NinjaController(NinjaServices ninjaServices) {
         this.ninjaServices = ninjaServices;
     }
 
+
+
     // Adicionar ninja(CREATE)
     @PostMapping("/adicionar")
-    public NinjaModel adicionarNinja(@RequestBody NinjaModel ninja){
+    public NinjaDTO adicionarNinja(@RequestBody NinjaDTO ninja){
        return ninjaServices.criarNinja(ninja);
 }
 
