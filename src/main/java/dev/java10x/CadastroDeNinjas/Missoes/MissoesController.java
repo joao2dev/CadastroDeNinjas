@@ -18,26 +18,26 @@ public class MissoesController {
 
     // Adicionar missao(CREATE)
     @PostMapping("/adicionar")
-    public MissoesModel criarMissao(@RequestBody MissoesModel missao){
+    public MissoesDTO criarMissao(@RequestBody MissoesDTO missao){
         return missaoServices.adicionarMissao(missao);
     }
 
 
     // mostrar todas as missoes(READ)
     @GetMapping("/mostrartodas")
-    public List<MissoesModel> mostrarTodasMissoes(){
+    public List<MissoesDTO> mostrarTodasMissoes(){
         return missaoServices.mostrarTodasMissoes();
     }
 
     // mostrar missao POR ID(READ)
     @GetMapping("/mostrar/{id}")
-    public MissoesModel mostrarMissaoId(@PathVariable Long id ){
+    public MissoesDTO mostrarMissaoId(@PathVariable Long id ){
         return missaoServices.mostrarMissaoPorId(id);
     }
 
     // Alterar dados das missoes(UPDATE)
     @PutMapping("/alterar/{id}")
-    public MissoesModel alterarMissaoPorId(@PathVariable Long id, @RequestBody MissoesModel missoes ){
+    public MissoesDTO alterarMissaoPorId(@PathVariable Long id, @RequestBody MissoesDTO missoes ){
         return missaoServices.atualizarMissaoPorId(id,missoes);
     }
 
