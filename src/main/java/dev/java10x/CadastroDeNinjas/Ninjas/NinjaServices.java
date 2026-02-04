@@ -1,13 +1,18 @@
 package dev.java10x.CadastroDeNinjas.Ninjas;
 
+import dev.java10x.CadastroDeNinjas.Missoes.MissoesModel;
+import dev.java10x.CadastroDeNinjas.Missoes.MissoesRepository;
+import dev.java10x.CadastroDeNinjas.Ninjas.NinjasRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+
 @Service
 public class NinjaServices {
+
     private final NinjasRepository ninjaRepository;
     private final NinjaMapper ninjaMapper;
 
@@ -16,35 +21,32 @@ public class NinjaServices {
         this.ninjaMapper = ninjaMapper;
     }
 
-    //    Listar todos os ninjas
-    public List<NinjaDTO> mostrarNinjas(){
+    public List<NinjaDTO> mostrarNinjas() {
         List<NinjaModel> ninja = ninjaRepository.findAll();
         return ninja.stream()
                 .map(ninjaMapper::map)
                 .collect(Collectors.toList());
     }
 
-//   Listar ninja por ID
-    public NinjaDTO mostrarNinjaPorId(Long id){
+    public NinjaDTO mostrarNinjaPorId(Long id) {
         Optional<NinjaModel> ninjaPorId = ninjaRepository.findById(id);
         return ninjaPorId.map(ninjaMapper::map).orElse(null);
     }
 
-//  Criar Ninja
-    public NinjaDTO criarNinja(NinjaDTO ninjaDTO){
+    public NinjaDTO criarNinja(NinjaDTO ninjaDTO) {
         NinjaModel ninja = ninjaMapper.map(ninjaDTO);
         ninja = ninjaRepository.save(ninja);
         return ninjaMapper.map(ninja);
     }
 
-//  Deletar Ninja
-    public void deletarNinjaPorId(Long id){
-         ninjaRepository.deleteById(id);
+    public void deletarNinjaPorId(Long id) {
+        ninjaRepository.deleteById(id);
     }
-//  Alterar informações de um ninja
-    public NinjaDTO alterarNinjaPorId(Long id, NinjaDTO ninjaDTO){
+
+    public NinjaDTO alterarNinjaPorId(Long id, NinjaDTO ninjaDTO) {
         Optional<NinjaModel> ninjaExistente = ninjaRepository.findById(id);
-        if (ninjaExistente.isPresent()){
+
+        if (ninjaExistente.isPresent()) {
             NinjaModel ninjaAtualizado = ninjaMapper.map(ninjaDTO);
             ninjaAtualizado.setId(id);
             NinjaModel ninjaSalvo = ninjaRepository.save(ninjaAtualizado);
