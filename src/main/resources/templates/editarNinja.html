@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Editar Ninja</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+        background: #f4f6f9;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #333;
+       }
+
+
+       h1 {
+        margin-bottom: 24px;
+        font-size: 28px;
+        color: #222;
+        }
+
+
+        form {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            max-width: 600px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            font-size: 14px;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
+        .btn-group {
+            margin-top: 20px;
+        }
+
+        button, a {
+            display: inline-block;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.2s ease;
+            border: none;
+        }
+
+        button {
+            background: #3b82f6;
+            color: #fff;
+        }
+
+        button:hover {
+            background: #2563eb;
+        }
+
+        a {
+            margin-left: 10px;
+            background: #6b7280;
+            color: #fff;
+        }
+
+        a:hover {
+            background: #4b5563;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Editar Ninja</h1>
+
+<form th:action="@{/ninjas/ui/alterar/{id}(id=${ninja.id})}" method="post">
+
+    <!-- ID escondido (segurança extra) -->
+    <input type="hidden" name="id" th:value="${ninja.id}">
+
+    <label>Nome</label>
+    <input type="text" name="nome" th:value="${ninja.nome}" required>
+
+    <label>Idade</label>
+    <input type="number" name="idade" th:value="${ninja.idade}" required>
+
+    <label>Email</label>
+    <input type="email" name="email" th:value="${ninja.email}" required>
+
+    <label>Rank</label>
+    <input type="text" name="rank" th:value="${ninja.rank}" required>
+
+    <label>Imagem (URL)</label>
+    <input type="text" name="img" th:value="${ninja.img}">
+
+    <label>Missão</label>
+    <select name="missoesId">
+
+        <option value="">Sem Missão</option>
+
+        <option th:each="missao : ${missoes}"
+                th:value="${missao.id}"
+                th:text="${missao.nome}"
+                th:selected="${ninja.missoes != null and missao.id == ninja.missoes.id}">
+        </option>
+
+    </select>
+
+
+    <div class="btn-group">
+        <button type="submit">Salvar alterações</button>
+        <a th:href="@{/ninjas/ui/mostrartodos}">Cancelar</a>
+    </div>
+
+</form>
+
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tabela de Ninjas</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f4f6f9;
+            padding: 40px;
+            color: #333;
+        }
+
+        /* Título */
+        h1 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #222;
+        }
+
+        /* Tabela */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Cabeçalho */
+        thead {
+            background: #1f2937;
+            color: #fff;
+        }
+
+        thead th {
+            padding: 14px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* Corpo da tabela */
+        tbody td {
+            padding: 14px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 14px;
+        }
+
+        /* Linhas */
+        tbody tr:hover {
+            background: #f1f5f9;
+        }
+
+        /* Última linha sem borda */
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Imagem */
+        img {
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        /* Coluna de ações */
+        td a {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-right: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: 0.2s ease;
+        }
+
+        /* Botões */
+        td a:nth-child(1) {
+            background: #3b82f6;
+            color: #fff;
+        }
+
+        td a:nth-child(1):hover {
+            background: #2563eb;
+        }
+
+        td a:nth-child(2) {
+            background: #f59e0b;
+            color: #fff;
+        }
+
+        td a:nth-child(2):hover {
+            background: #d97706;
+        }
+
+        td a:nth-child(3) {
+            background: #ef4444;
+            color: #fff;
+        }
+
+        td a:nth-child(3):hover {
+            background: #dc2626;
+        }
+
+        /* Texto "Sem Missões" */
+        span {
+            font-weight: 500;
+            color: #6b7280;
+        }
+        .btn-add {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 18px;
+            background: #10b981;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: 0.2s ease;
+        }
+
+        .btn-add:hover {
+            background: #059669;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <h1>Cadastro de Ninjas</h1>
+    <a th:href="@{/ninjas/ui/adicionar}" class="btn-add">+ Adicionar Ninja</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>imagem</th>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Idade</th>
+                <th>Email</th>
+                <th>Rank</th>
+                <th>Missoes</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="ninja : ${ninjas}">
+            <td>
+                <img th:src="${ninja.img}" alt="imagem do ninja" width="80">
+            </td>
+            <td th:text="${ninja.id}"></td>
+            <td th:text="${ninja.nome}"></td>
+            <td th:text="${ninja.idade}"></td>
+            <td th:text="${ninja.email}"></td>
+            <td th:text="${ninja.rank}"></td>
+            <td>
+                <span th:if="${ninja.missoes != null}"
+                    th:text="${ninja.missoes.nome}">
+                </span>
+
+                <span th:if="${ninja.missoes == null}">
+                    Sem Missões
+                </span>
+            </td>
+            <td>
+
+                <a th:href="@{/ninjas/ui/mostrar/{id}(id=${ninja.id})}">Ver detalhes</a>
+                <a th:href="@{/ninjas/ui/alterar/{id}(id=${ninja.id})}">Alterar</a>
+                <a th:href="@{/ninjas/ui/deletarninja/{id}(id=${ninja.id})}">Deletar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

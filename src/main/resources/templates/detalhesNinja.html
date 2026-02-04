@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Ninja</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: #e5e7eb;
+            padding: 40px;
+        }
+
+        .card {
+            max-width: 600px;
+            margin: auto;
+            background: #020617;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .img-box {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .img-box img {
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #38bdf8;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 10px 0;
+            color: #94a3b8;
+            width: 35%;
+        }
+
+        td {
+            padding: 10px 0;
+        }
+
+        .btn-voltar {
+            display: inline-block;
+            margin-top: 24px;
+            padding: 12px 20px;
+            background: #38bdf8;
+            color: #020617;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+
+        .btn-voltar:hover {
+            background: #0ea5e9;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card" th:if="${ninja != null}">
+
+    <h1>Detalhes do Ninja</h1>
+
+    <!-- IMAGEM (blindada contra null) -->
+    <div class="img-box" th:if="${ninja.img != null}">
+        <img th:src="${ninja.img}" alt="Imagem do Ninja">
+    </div>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <td th:text="${ninja.id}"></td>
+        </tr>
+        <tr>
+            <th>Nome</th>
+            <td th:text="${ninja.nome}"></td>
+        </tr>
+        <tr>
+            <th>Idade</th>
+            <td th:text="${ninja.idade}"></td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td th:text="${ninja.email}"></td>
+        </tr>
+        <tr>
+            <th>Rank</th>
+            <td th:text="${ninja.rank}"></td>
+        </tr>
+        <tr>
+            <th>Missão</th>
+            <td>
+                <span th:if="${ninja.missoes != null}"
+                      th:text="${ninja.missoes.nome}"></span>
+                <span th:if="${ninja.missoes == null}">Sem Missões</span>
+            </td>
+        </tr>
+    </table>
+
+    <!-- BOTÃO VOLTAR -->
+    <a th:href="@{/ninjas/ui/mostrartodos}" class="btn-voltar">Voltar</a>
+
+</div>
+
+</body>
+</html>
