@@ -34,10 +34,12 @@ public class NinjaModel {
     @Column(name = "rank")
     private String rank;
 
-    @Column(name = "img_url")
+    @Lob
+    @Column(name = "img_url", columnDefinition = "CLOB")
     private String img;
 
-//  @ManyToOne muitos ninjas para uma missao
+
+    //  @ManyToOne muitos ninjas para uma missao
     @ManyToOne
     @JoinColumn(name = "missoes_id")
     private MissoesModel missoes;
