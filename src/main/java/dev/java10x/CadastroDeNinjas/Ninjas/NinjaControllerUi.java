@@ -46,7 +46,7 @@ public class NinjaControllerUi {
         NinjaDTO ninja = ninjaServices.mostrarNinjaPorId(id);
         List<MissoesDTO> missoes = missoesServices.mostrarTodasMissoes();
         model.addAttribute("ninja",ninja);
-        model.addAttribute("missoes",missoes);
+        model.addAttribute("missao",missoes);
         return "editarNinja";
     }
     @PostMapping("/alterar/{id}")
@@ -57,7 +57,7 @@ public class NinjaControllerUi {
     @GetMapping("/adicionar")
     public String adicionarNinja(Model model){
         model.addAttribute("ninja",new NinjaDTO());
-        model.addAttribute("missoes", missoesServices.mostrarTodasMissoes());
+        model.addAttribute("missao", missoesServices.mostrarTodasMissoes());
         return "adicionarNinja";
     }
 

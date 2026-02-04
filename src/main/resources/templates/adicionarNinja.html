@@ -119,18 +119,15 @@
         <label>Imagem (URL)</label>
         <input type="text" name="img">
 
-        <label>Missão</label>
-        <select name="missoesId">
+        <select name="missoes.id">
+            <option value="">Selecione uma missão</option>
 
-            <option value="">Sem Missão</option>
-
-            <option th:each="missao : ${missoes}"
+            <option th:each="missao : ${missao}"
                     th:value="${missao.id}"
-                    th:text="${missao.nome}"
-                    th:selected="${ninja.missoes != null and missao.id == ninja.missoes.id}">
+                    th:text="${missao.nome}">
             </option>
-
         </select>
+
 
         <div class="btn-group">
             <button type="submit">Adicionar Ninja</button>

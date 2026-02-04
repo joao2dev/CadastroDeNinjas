@@ -40,7 +40,7 @@ public class NinjaModel {
 
 
     //  @ManyToOne muitos ninjas para uma missao
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "missoes_id")
     private MissoesModel missoes;
 
